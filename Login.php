@@ -6,13 +6,13 @@
 
     if($connection->connect_errno!=0)
     {
-      echo "Error: ".$connection->connect_errno." Opis: ".$connection->connect_error;
+      echo "Error: ".$connection->connect_errno.;
     }
     else
     {
         $login = $_POST['login'];
         $password = $_POST['password'];
-        
+
 
         $connection->close();
     }
