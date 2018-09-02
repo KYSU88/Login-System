@@ -28,11 +28,13 @@
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['dnipremium'] = $row['dnipremium'];
 
+                unset($_SESSION['loginError']);
                 $result->free_result();
                 header('Location: Game.php');
-            }else
+            } else
             {
-
+                $_SESSION['loginError'] = '<span style="color:red">Nieprawidłowy login lub hasło!</span>';
+                header('Location: index.php');
             }
         }
 
