@@ -1,5 +1,9 @@
 <?php
     session_start();
+    if(!isset($_SESSION['loggedIn'])){
+        header('Location: index.php');
+        exit;
+    }
 ?>
 <!DOCTYPE HTML>
 <html lang="pl">
@@ -11,7 +15,7 @@
 
 <body>
 <?php
-    echo "<p>Witaj ".$_SESSION['user']."!</p>";
+    echo "<p>Witaj ".$_SESSION['user'].'![<a href="LogOut.php">Wyloguj się</a>]</p>';
     echo "<p><b>Drewno</b>: ".$_SESSION['drewno'];
     echo " | <b>Kamień</b>: ".$_SESSION['kamien'];
     echo " | <b>Zboże</b>: ".$_SESSION['zboze']."</p>";
