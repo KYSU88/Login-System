@@ -3,7 +3,7 @@
     if((isset($_SESSION['loggedIn'])) && ($_SESSION['loggedIn']==true))
     {
         header('Location: Game.php');
-        exit;
+        exit();
     }
 ?>
 <!DOCTYPE HTML>
