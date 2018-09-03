@@ -20,7 +20,9 @@
             $howManyUsers = $result->num_rows;
             if($howManyUsers > 0)
             {
+                $_SESSION['loggedIn'] = true;
                 $row = $result->fetch_assoc();
+                $_SESSION['id'] = $row['id'];
                 $_SESSION['user'] = $row['user'];
                 $_SESSION['drewno'] = $row['drewno'];
                 $_SESSION['kamien'] = $row['kamien'];
