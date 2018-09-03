@@ -1,5 +1,9 @@
 <?php
     session_start();
+    if((!isset($_POST['login'])) || (!isset($_POST['password']))){
+        header('Location: index.php');
+        exit();
+    }
     require_once "Connect.php";
 
     $connection = @new mysqli($host, $db_user, $db_password, $db_name);
