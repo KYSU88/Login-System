@@ -1,5 +1,24 @@
 <?php
     session_start();
+
+    if(isset($_POST['email']))
+    {
+        // successful validation
+        $correctValidation = true;
+        // check nickname
+        $nick = $_POST['nick'];
+        // verification of the nick length
+        if((strlen($nick)<3) || (strlen($nick)>20))
+        {
+            $correctValidation = false;
+            $_SESSION['e_nick'] = "Nick musi posiadać od 3 do 20 znaków";
+        }
+        if($correctValidation=true)
+        {
+            // All validation is correct, add user to db
+        }
+    }
+
 ?>
 <!DOCTYPE HTML>
 <html lang="pl">
