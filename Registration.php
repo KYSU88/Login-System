@@ -11,9 +11,9 @@
         if((strlen($nick)<3) || (strlen($nick)>20))
         {
             $correctValidation = false;
-            $_SESSION['e_nick'] = "Nick musi posiadać od 3 do 20 znaków";
+            $_SESSION['error_nick'] = "Nick musi posiadać od 3 do 20 znaków";
         }
-        if($correctValidation=true)
+        if($correctValidation==true)
         {
             // All validation is correct, add user to db
         }
