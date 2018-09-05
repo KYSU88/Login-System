@@ -16,6 +16,8 @@
         if($correctValidation==true)
         {
             // All validation is correct, add user to db
+            echo "Udana walidacja";
+            exit();
         }
     }
 
@@ -27,6 +29,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>Gra przeglądarkowa - załóż konto</title>
     <script src='https://www.google.com/recaptcha/api.js'></script>
+    <style>
+        .error
+        {
+            color:red;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 
 <body>
