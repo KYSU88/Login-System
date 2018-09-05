@@ -32,6 +32,13 @@
 <body>
     <form method="post">
         Nickname: <br /> <input type="text" name="nick"/><br />
+        <?php
+            if(isset($_SESSION['error_nick']))
+            {
+                echo '<div class="error">'.$_SESSION['error_nick'].'</div>';
+                unset($_SESSION['error_nick']);
+            }
+        ?>
         E-mail: <br /> <input type="email" name="email"/><br />
         Hasło: <br /> <input type="hasło" name="password1"/><br />
         Powtórz hasło: <br /> <input type="hasło" name="password2"/><br />
