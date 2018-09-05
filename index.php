@@ -16,6 +16,10 @@
 
 <body>
     Gra Online<br /><br />
+
+    <a href="Registration.php">Rejestracja - załóż konto!</a>
+    <br /><br />
+
     <form action="Login.php" method="post">
         Login: <br /> <input type="text" name="login"/> <br />
         Hasło: <br /> <input type="password" name="password"/> <br />
