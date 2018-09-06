@@ -47,6 +47,8 @@
             $_SESSION['error_password'] = "Podane hasła nie są identyczne";
         }
 
+        $hashPassword = password_hash($password1, PASSWORD_DEFAULT);
+
         if($correctValidation==true)
         {
             // All validation is correct, add user to db
