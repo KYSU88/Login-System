@@ -30,6 +30,23 @@
             $_SESSION['error_email'] = "Podaj poprawny adres email";
         }
 
+        // check password validation
+
+        $password1 = $_POST['password1'];
+        $password2 = $_POST['password2'];
+
+        if((strlen($password1)<8) || (strlen($password1)>20))
+        {
+            $correctValidation = false;
+            $_SESSION['error_password'] = "Hasło musi posiadać od 8 do 20 znaków";
+        }
+
+        if($password1 != $password2)
+        {
+            $correctValidation = false;
+            $_SESSION['error_password'] = "Podane hasła nie są identyczne";
+        }
+
         if($correctValidation==true)
         {
             // All validation is correct, add user to db
@@ -75,6 +92,13 @@
         }
         ?>
         Hasło: <br /> <input type="hasło" name="password1"/><br />
+        <?php
+        if(isset($_SESSION['error_password']))
+        {
+            echo '<div class="error">'.$_SESSION['error_password'].'</div>';
+            unset($_SESSION['error_password']);
+        }
+        ?>
         Powtórz hasło: <br /> <input type="hasło" name="password2"/><br />
         <label>
             <input type="checkbox" name="rules"/> Akceptuję regulamin
