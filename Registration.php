@@ -16,7 +16,18 @@
 
         if(ctype_alnum($nick)==false){
             $correctValidation = false;
-            $_SESSION['error_nick'] = "NIck może składać się tylko z lite i cyfr ( bez polskich znaków";
+            $_SESSION['error_nick'] = "NIck może składać się tylko z lite i cyfr (bez polskich znaków)";
+        }
+
+        // check e-mail validation
+
+        $email = $_POST['email'];
+        $saveEmail = filter_var($email,FILTER_SANITIZE_EMAIL);
+
+        if((filter_var($saveEmail,FILTER_VALIDATE_EMAIL)==false) || ($saveEmail != $email))
+        {
+            $correctValidation = false;
+            $_SESSION['error_email'] = "Podaj poprawny adres email";
         }
 
         if($correctValidation==true)
@@ -56,6 +67,13 @@
             }
         ?>
         E-mail: <br /> <input type="email" name="email"/><br />
+        <?php
+        if(isset($_SESSION['error_email']))
+        {
+            echo '<div class="error">'.$_SESSION['error_email'].'</div>';
+            unset($_SESSION['error_email']);
+        }
+        ?>
         Hasło: <br /> <input type="hasło" name="password1"/><br />
         Powtórz hasło: <br /> <input type="hasło" name="password2"/><br />
         <label>
