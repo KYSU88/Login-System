@@ -18,28 +18,34 @@
         $password = $_POST['password'];
 
         $login = htmlentities($login, ENT_QUOTES, "UTF-8");
-        $password  = htmlentities($password, ENT_QUOTES, "UTF-8");
 
 
-        if($result = @$connection->query(sprintf("SELECT * FROM uzytkownicy WHERE user='%s' AND pass='%s'", mysqli_real_escape_string($connection,$login),
-            mysqli_real_escape_string($connection,$password))));
+        if($result = @$connection->query(sprintf("SELECT * FROM uzytkownicy WHERE user='%s'", mysqli_real_escape_string($connection,$login))))
         {
             $howManyUsers = $result->num_rows;
             if($howManyUsers > 0)
             {
-                $_SESSION['loggedIn'] = true;
                 $row = $result->fetch_assoc();
-                $_SESSION['id'] = $row['id'];
-                $_SESSION['user'] = $row['user'];
-                $_SESSION['drewno'] = $row['drewno'];
-                $_SESSION['kamien'] = $row['kamien'];
-                $_SESSION['zboze'] = $row['zboze'];
-                $_SESSION['email'] = $row['email'];
-                $_SESSION['dnipremium'] = $row['dnipremium'];
+                if(password_verify($password, $row['pass']))
+                {
+                    $_SESSION['loggedIn'] = true;
 
-                unset($_SESSION['loginError']);
-                $result->free_result();
-                header('Location: Game.php');
+                    $_SESSION['id'] = $row['id'];
+                    $_SESSION['user'] = $row['user'];
+                    $_SESSION['drewno'] = $row['drewno'];
+                    $_SESSION['kamien'] = $row['kamien'];
+                    $_SESSION['zboze'] = $row['zboze'];
+                    $_SESSION['email'] = $row['email'];
+                    $_SESSION['dnipremium'] = $row['dnipremium'];
+
+                    unset($_SESSION['loginError']);
+                    $result->free_result();
+                    header('Location: Game.php');
+                } else
+                {
+                    $_SESSION['loginError'] = '<span style="color:red">Nieprawidłowy login lub hasło!</span>';
+                    header('Location: index.php');
+                }
             } else
             {
                 $_SESSION['loginError'] = '<span style="color:red">Nieprawidłowy login lub hasło!</span>';
