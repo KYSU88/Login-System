@@ -13,6 +13,12 @@
             $correctValidation = false;
             $_SESSION['error_nick'] = "Nick musi posiadać od 3 do 20 znaków";
         }
+
+        if(ctype_alnum($nick)==false){
+            $correctValidation = false;
+            $_SESSION['error_nick'] = "NIck może składać się tylko z lite i cyfr ( bez polskich znaków";
+        }
+
         if($correctValidation==true)
         {
             // All validation is correct, add user to db
