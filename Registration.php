@@ -49,6 +49,14 @@
 
         $hashPassword = password_hash($password1, PASSWORD_DEFAULT);
 
+        // checkbox validation
+
+        if(!isset($_POST['rules']))
+        {
+            $correctValidation = false;
+            $_SESSION['error_rules'] = "Potwierdź akceptację regulaminu";
+        }
+
         if($correctValidation==true)
         {
             // All validation is correct, add user to db
@@ -105,6 +113,13 @@
         <label>
             <input type="checkbox" name="rules"/> Akceptuję regulamin
         </label>
+        <?php
+        if(isset($_SESSION['error_rules']))
+        {
+            echo '<div class="error">'.$_SESSION['error_rules'].'</div>';
+            unset($_SESSION['error_rules']);
+        }
+        ?>
         <div class="g-recaptcha" data-sitekey="6Le5lG4UAAAAANx904pBZNhD012Sjw82Ws7m3ASx"></div>
         <br />
         <input type="submit" value="Zarejestruj się" />
