@@ -81,7 +81,7 @@
             }
             else
             {
-                $result = $connect->query("SELECT id FROM uzytkownicy WHERE eemail='$email'");
+                $result = $connect->query("SELECT id FROM uzytkownicy WHERE email='$email'");
                 if(!$result) throw new Exception($connect->error);
 
                 $how_many_mail = $result->num_rows;
