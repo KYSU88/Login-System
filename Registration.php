@@ -57,6 +57,17 @@
             $_SESSION['error_rules'] = "Potwierdź akceptację regulaminu";
         }
 
+        // recaptcha validation
+        $secretKey = "6Le5lG4UAAAAAAAkOHBs-tK4xjIl2vo8tqw6JS3q";
+        $check = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secretKey.'&response='.$_POST['g-recaptcha-response']);
+        $response = json_decode($check);
+
+        if($response->success==false)
+        {
+            $correctValidation = false;
+            $_SESSION['error_captcha'] = "Potwierdź, że nie jesteś botem";
+        }
+
         if($correctValidation==true)
         {
             // All validation is correct, add user to db
@@ -121,6 +132,13 @@
         }
         ?>
         <div class="g-recaptcha" data-sitekey="6Le5lG4UAAAAANx904pBZNhD012Sjw82Ws7m3ASx"></div>
+        <?php
+        if(isset($_SESSION['error_captcha']))
+        {
+            echo '<div class="error">'.$_SESSION['error_captcha'].'</div>';
+            unset($_SESSION['error_captcha']);
+        }
+        ?>
         <br />
         <input type="submit" value="Zarejestruj się" />
     </form>
