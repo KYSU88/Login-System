@@ -81,14 +81,28 @@
             }
             else
             {
+                // if email is already reserved
+
                 $result = $connect->query("SELECT id FROM uzytkownicy WHERE email='$email'");
                 if(!$result) throw new Exception($connect->error);
 
-                $how_many_mail = $result->num_rows;
-                if($how_many_mail>0)
+                $how_many_nicks = $result->num_rows;
+                if($how_many_nicks>0)
                 {
                     $correctValidation = false;
                     $_SESSION['error_email'] = "Istnieje juz konto przypisane do tego adresu e-mail";
+                }
+
+                // if nick is already reserved
+
+                $result = $connect->query("SELECT id FROM uzytkownicy WHERE user='$nick'");
+                if(!$result) throw new Exception($connect->error);
+
+                $how_many_nicks = $result->num_rows;
+                if($how_many_nicks>0)
+                {
+                    $correctValidation = false;
+                    $_SESSION['error_nick'] = "Istnieje juz gracz o takim nicku wybierz inny";
                 }
 
                 $connect->close();
