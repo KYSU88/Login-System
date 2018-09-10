@@ -164,7 +164,7 @@
             unset($_SESSION['error_email']);
         }
         ?>
-        Hasło: <br /> <input type="hasło" name="password1"/><br />
+        Hasło: <br /> <input type="password" name="password1"/><br />
         <?php
         if(isset($_SESSION['error_password']))
         {
@@ -172,7 +172,7 @@
             unset($_SESSION['error_password']);
         }
         ?>
-        Powtórz hasło: <br /> <input type="hasło" name="password2"/><br />
+        Powtórz hasło: <br /> <input type="password" name="password2"/><br />
         <label>
             <input type="checkbox" name="rules"/> Akceptuję regulamin
         </label>
