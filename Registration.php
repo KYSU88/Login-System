@@ -105,19 +105,26 @@
                     $_SESSION['error_nick'] = "Istnieje juz gracz o takim nicku wybierz inny";
                 }
 
+                if($correctValidation==true)
+                {
+                    // All validation is correct, add user to db
+                    if($connect->query("INSERT INTO uzytkownicy VALUES (NULL,'$nick','$hashPassword','$email',100,100,100,14)"))
+                    {
+                        $_SESSION['successfulRegistration'] = true;
+                        header('Location: Welcome.php');
+                    }
+                    else
+                    {
+                        throw new Exception($connect->error);
+                    }
+                }
+
                 $connect->close();
             }
         }catch (Exception $e)
         {
             echo '<span style="color:red">Błąd serwera</span>';
             echo '<br /> Informacja developerska: '.$e;
-        }
-
-        if($correctValidation==true)
-        {
-            // All validation is correct, add user to db
-            echo "Udana walidacja";
-            exit();
         }
     }
 
