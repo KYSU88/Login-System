@@ -68,6 +68,13 @@
             $_SESSION['error_captcha'] = "Potwierdź, że nie jesteś botem";
         }
 
+        // remember the entered data
+        $_SESSION['registrationForm_nick'] = $nick;
+        $_SESSION['registrationForm_email'] = $email;
+        $_SESSION['registrationForm_password1'] = $password1;
+        $_SESSION['registrationForm_password2'] = $password2;
+        if(isset($_POST['rules'])) $_SESSION['registrationForm_rules'] = true;
+
         require_once "Connect.php";
 
         mysqli_report(MYSQLI_REPORT_STRICT);
@@ -148,7 +155,13 @@
 
 <body>
     <form method="post">
-        Nickname: <br /> <input type="text" name="nick"/><br />
+        Nickname: <br /> <input type="text" value="<?php
+            if(isset($_SESSION['registrationForm_nick']))
+            {
+               echo $_SESSION['registrationForm_nick'];
+               unset($_SESSION['registrationForm_nick']);
+            }
+        ?>" name="nick"/><br />
         <?php
             if(isset($_SESSION['error_nick']))
             {
@@ -156,7 +169,13 @@
                 unset($_SESSION['error_nick']);
             }
         ?>
-        E-mail: <br /> <input type="email" name="email"/><br />
+        E-mail: <br /> <input type="email" value="<?php
+        if(isset($_SESSION['registrationForm_email']))
+        {
+            echo $_SESSION['registrationForm_email'];
+            unset($_SESSION['registrationForm_email']);
+        }
+        ?>" name="email"/><br />
         <?php
         if(isset($_SESSION['error_email']))
         {
@@ -164,7 +183,13 @@
             unset($_SESSION['error_email']);
         }
         ?>
-        Hasło: <br /> <input type="password" name="password1"/><br />
+        Hasło: <br /> <input type="password" value="<?php
+        if(isset($_SESSION['registrationForm_password1']))
+        {
+            echo $_SESSION['registrationForm_password1'];
+            unset($_SESSION['registrationForm_password1']);
+        }
+        ?>" name="password1"/><br />
         <?php
         if(isset($_SESSION['error_password']))
         {
@@ -172,9 +197,21 @@
             unset($_SESSION['error_password']);
         }
         ?>
-        Powtórz hasło: <br /> <input type="password" name="password2"/><br />
+        Powtórz hasło: <br /> <input type="password" value="<?php
+        if(isset($_SESSION['registrationForm_password2']))
+        {
+            echo $_SESSION['registrationForm_password2'];
+            unset($_SESSION['registrationForm_password2']);
+        }
+        ?>" name="password2"/><br />
         <label>
-            <input type="checkbox" name="rules"/> Akceptuję regulamin
+            <input type="checkbox" name="rules" <?php
+                if(isset($_SESSION['registrationForm_rules']))
+                {
+                    echo "checked";
+                    unset($_SESSION['registrationForm_rules']);
+                }
+            ?>/> Akceptuję regulamin
         </label>
         <?php
         if(isset($_SESSION['error_rules']))
