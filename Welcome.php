@@ -9,6 +9,19 @@
     {
         unset($_SESSION['successfulRegistration']);
     }
+    // delete remembered session variables from form
+    if(isset($_SESSION['registrationForm_nick'])) unset($_SESSION['registrationForm_nick']);
+    if(isset($_SESSION['registrationForm_email'])) unset($_SESSION['registrationForm_email']);
+    if(isset($_SESSION['registrationForm_password1'])) unset($_SESSION['registrationForm_password1']);
+    if(isset($_SESSION['registrationForm_password2'])) unset($_SESSION['registrationForm_password2']);
+    if(isset($_SESSION['registrationForm_rules'])) unset($_SESSION['registrationForm_rules']);
+
+    // delete registration error
+    if(isset($_SESSION['error_nick'])) unset($_SESSION['error_nick']);
+    if(isset($_SESSION['error_email'])) unset($_SESSION['error_email']);
+    if(isset($_SESSION['error_password'])) unset($_SESSION['error_password']);
+    if(isset($_SESSION['error_rules'])) unset($_SESSION['error_rules']);
+    if(isset($_SESSION['error_captcha'])) unset($_SESSION['error_captcha']);
 ?>
 <!DOCTYPE HTML>
 <html lang="pl">
