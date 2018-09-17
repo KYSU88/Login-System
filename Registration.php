@@ -115,7 +115,7 @@
                 if($correctValidation==true)
                 {
                     // All validation is correct, add user to db
-                    if($connect->query("INSERT INTO uzytkownicy VALUES (NULL,'$nick','$hashPassword','$email',100,100,100,14)"))
+                    if($connect->query("INSERT INTO uzytkownicy VALUES (NULL,'$nick','$hashPassword','$email', 100, 100, 100, now() + INTERVAL  14 DAY)"))
                     {
                         $_SESSION['successfulRegistration'] = true;
                         header('Location: Welcome.php');
